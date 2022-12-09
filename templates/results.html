@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            STOCK ANALYTICS
+        </title>
+        <link href="{{ url_for('static', filename='results.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <a href="{{ url_for('index') }}">BACK</a>  STOCK ANALYTICS
+            </div>
+            <div class="sub-header">
+                TODAY'S {{quote}} STOCK DATA
+            </div>
+            <div class="today_data">
+                <div class="data_card blue-background">
+                    <span>{{open_s}}</span>
+                    <span>OPEN</span>
+                </div>
+                <div class="data_card yellow-background">
+                    <span>{{high_s}}</span>
+                    <span>HIGH</span>
+                </div>
+                <div class="data_card green-background">
+                    <span>{{low_s}}</span>
+                    <span>LOW</span>
+                </div>
+                <div class="data_card red-background">
+                    <span>{{close_s}}</span>
+                    <span>CLOSE</span>
+                </div>
+                <div class="data_card blue-background">
+                    <span>{{vol}}</span>
+                    <span>VOLUME</span>
+                </div>
+            </div>
+            <div class="model-cards">
+                <div class="card">
+                    <h4>RECENT TRENDS IN {{quote}}</h4>
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='Trends.png')}}" />    
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>LINEAR REGRESSION MODEL ACCURACY</h4>
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='LR.png')}}" />
+                    </div>
+                    <p>ACCURACY FOR THE MODEL: {{accuracy_lr}}</p>
+                    <p>RMSE FOR THE MODEL: {{error_lr}}</p>
+                </div>
+                <div class="card">
+                    <h4>LSTM MODEL ACCURACY</h4>
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='LSTM.png')}}" />    
+                    </div>
+                    <p>ACCURACY FOR THE MODEL: {{accuracy_lstm}}</p>
+                    <p>RMSE FOR THE MODEL: {{error_lstm}}</p>
+                </div>
+                <div class="card">
+                    <h4>ARIMA MODEL ACCURACY</h4>
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='ARIMA.png')}}" />
+                    </div>
+                    <p>ACCURACY FOR THE MODEL: {{accuracy_arima}}</p>
+                    <p>RMSE FOR THE MODEL: {{error_arima}}</p>
+                </div>
+            </div>
+            <div class="prediction-cards">
+                <div class="prediction-card blue-background">
+                    <h3>{{lr_pred}}</h3>
+                    <p>TOMMOROW'S CLOSING PRICE PREDICTED BY LR</p>
+                </div>
+                <div class="prediction-card green-background">
+                    <h3>{{lstm_pred}}</h3>
+                    <p>TOMMOROW'S CLOSING PRICE PREDICTED BY LSTM</p>
+                </div>
+                <div class="prediction-card red-background">
+                    <h3>{{arima_pred}}</h3>
+                    <p>TOMMOROW'S CLOSING PRICE PREDICTED BY ARIMA</p>
+                </div>
+            </div>
+            <div class="recent_headlines">
+                <div class="headlines-title"><img src="{{url_for('static', filename='newsLogo.png')}}"><h1>RECENT NEWS HEADLINES ABOUT {{quote}}</h1></div>
+                <div class="news-scroll">
+                    {% for i in range(total_items) %}
+                    <p>{{news_list[i]}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="sentiment-div">
+                <h1>SENTIMENT ANALYSIS FOR {{quote}} NEWS</h1>
+                <div class="sentiment-row2">
+                    <div class="sentiment-pie">
+                        <img src="{{url_for('static', filename='SA.png')}}">
+                    </div>
+                    <div class="overall-sentiment">
+                        <h1>{{news_pol}}</h1>
+                        <p>OVERALL NEWS POLARITY</p>
+                    </div>
+                </div>
+            </div>
+            <div class="forecast-div">
+                <h1>PREDICTED {{quote}} PRICE FOR NEXT SEVEN DAYS</h1>
+                <table>
+                    <tr>
+                        <th class="first-column">#</th>
+                        <th>Close</th>
+                    </tr>
+                    <tr>
+                        <td class="first-column"><img src="{{url_for('static', filename='arrow.jpg')}}"></td>
+                    <td>
+                        {% for i in range(7) %}
+                        {{forecast_set[i]}}<br><br>
+                        {% endfor %}    
+                    </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="forecast-result">
+                According to the ML Predictions & Sentiment Analysis of the news headlines, a <b>{{idea}}</b> in <b>{{quote}}</b> stock is expected => <b>{{decision}}</b>
+            </div>
+        </div>
+    </body>
+</html>

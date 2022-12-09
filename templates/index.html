@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stock Prediction Web Application</title>
+        <link href="{{ url_for('static', filename='index.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="heading-container">
+                RECOMMENDATION SYSTEM FOR STOCK MARKET
+            </div>
+            <div class="demo-flex-spacer"></div>
+            <form class="webflow-style-input" action="{{ url_for('results') }}" method="post">
+              <input class="" type="text" placeholder="What's your stock?" name="ticker"></input>
+              <button type="submit"><i class="icon ion-android-arrow-forward"></i></button>
+            </form>
+            <div class="demo-flex-spacer"></div>
+        </div>
+    </body>
+</html>
